@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Django Blog {% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <nav style="display: flex; height: 10vh; margin-bottom: 2em; border: 2px solid rgb(93, 124, 93); align-items: center; column-gap: 1.5em; padding-left: 2em; width: 100%; width: 100%;">
+        <a href="{% url 'home' %}" style="font-weight: bolder; font-size: 2.5em; color: rgb(93, 124, 93);">Django Blog |</a>
+        {% if user.is_authenticated %}
+       <div style="font-style: italic;"> Welcome, {{ user.username }}</div> 
+        <span><a href="{% url 'password_change'%}">Change password</a></span> |
+        <span><a href="{% url 'logout' %}">
+                Log Out</a></span>
+        <div>
+            {% if user.is_authenticated %}
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="{% url 'article_new' %}">+ New</a>
+                </li>
+            </ul>
+            {% endif %}
+        </div>
+        {% else %}
+        <form class="form-inline ml-auto">
+            <a href="{% url 'login' %}" class="btn btn-outline-secondary">
+                Log In</a>
+            <a href="{% url 'signup' %}" class="btn btn-primary ml-2">
+                Sign up</a>
+        </form>
+        {% endif %}
+    </nav>
+    <main>
+        <div class="container">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </main>
+
+
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+
+</html>
