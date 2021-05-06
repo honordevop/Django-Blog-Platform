@@ -12,15 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 from decouple import config
-# from environ import Env
-
-# env = Env()
-# env.read_env()
-
-# import environ
-
-# env = environ.Env()
-# environ.Env.read_env()
+import django_heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -162,3 +154,4 @@ LOGOUT_REDIRECT_URL = 'home'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
+django_heroku.settings(locals())
